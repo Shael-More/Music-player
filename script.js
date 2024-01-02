@@ -22,13 +22,14 @@ function playPause() {
 if (song.play()) {
   setInterval(() => {
     progress.value = song.currentTime;
-  }, 500);
+  }, 5000);
 }
 
 progress.onchange = function() {
   song.play();
 
-  song.currentTime = progress.value;
+  let seekto = song.duration * (progress.value / 100);
+  song.currentTime = seekto;
   ctrlIcon.classList.add('fa-pause');
   ctrlIcon.classList.remove('fa-play');
 };
